@@ -64,46 +64,50 @@ require([
     //Create symbols that are rendered based on PARK_NAME field from the database
     var bouldSym = {
             type: "picture-marker",
-            url: "http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Ball-Right-Chartreuse-icon.png",
+            url: "http://static.arcgis.com/images/Symbols/Basic/RedStickpin.png",
             width: "30px",
-            height: "30px"
+            height: "30px",
+            angle: 30
         };
             
     var sulphSym = {
             type: "picture-marker",
-            url: "http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Ball-Right-Azure-icon.png",
-            //url: "https://png.pngtree.com/element_origin_min_pic/16/12/15/eb4530ffe83dc176006586dd6bff701c.jpg",
-            //url: "http://resources.esri.com/help/900/arcgisexplorer/sdk/doc/bitmaps/148cca9a-87a8-42bd-9da4-5fe427b6fb7b127.png",
+            url: "http://static.arcgis.com/images/Symbols/Basic/GreenStickpin.png",
             width: "30px",
-            height: "30px"
+            height: "30px",
+            angle: 30
         };
             
     var canSym = {
             type: "picture-marker",
-            url: "http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Ball-Right-Pink-icon.png",
+            url: "http://static.arcgis.com/images/Symbols/Basic/YellowStickpin.png",
             width: "30px",
-            height: "30px"
+            height: "30px",
+            angle: 30
         };
             
     var rmnpTrailsSym = {
             type: "picture-marker",
-            url: "http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Ball-Right-Pink-icon.png",
+            url: "http://static.arcgis.com/images/Symbols/Basic/OrangeStickpin.png",
             width: "30px",
-            height: "30px"
+            height: "30px",
+            angle: 30
         };
             
     var rmnpSym = {
             type: "picture-marker",
-            url: "http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Ball-Right-Pink-icon.png",
+            url: "http://static.arcgis.com/images/Symbols/Basic/BlueStickpin.png",
             width: "30px",
-            height: "30px"
+            height: "30px",
+            angle: 30
         };
 
     var defaultSym = {
-            type: "simple-marker",
-            color: "#FFAAFF",
-            size: 7,
-            style: "solid"
+            type: "picture-marker",
+            url: "http://static.arcgis.com/images/Symbols/Basic/BlackStickpin.png",
+            width: "30px",
+            height: "30px",
+            angle: 30
         };
             
     var symRenderer = {
@@ -124,7 +128,7 @@ require([
                 value: "Rocky Mountain National Park Trails",
                 symbol: rmnpTrailsSym
             }, {
-                value: "Rocky MountainNational Park",
+                value: "Rocky Mountain National Park",
                 symbol: rmnpSym
             }]
         };
