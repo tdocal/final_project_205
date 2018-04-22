@@ -1,3 +1,4 @@
+var view;
 require([
     "esri/Map",
     "esri/views/MapView",
@@ -5,9 +6,9 @@ require([
     "esri/widgets/ScaleBar",
     "esri/widgets/Home",
     "esri/widgets/Legend",
-    "esri/geometry/coordinateFormatter",
     "esri/widgets/Expand",
     "esri/widgets/BasemapGallery",
+    "esri/geometry/support/webMercatorUtils",
     "dojo/domReady!"
 ], function (
     Map,
@@ -16,28 +17,32 @@ require([
     ScaleBar,
     Home,
     Legend,
-    coordinateFormatter,
     Expand,
-    BasemapGallery
+    BasemapGallery,
+    webMercatorUtils
 ) {
     var map = new Map({
         basemap: "topo"
     });
 
-    var view = new MapView({
+    view = new MapView({
         map: map,
-        center: [-105.60, 40.25],
-        zoom: 9,
-        container: "viewDiv"
-        /*extent: {
-            xmin: -11887504,
-            ymin: 4777124,
-            xmax: -11678831,
-            ymax: 5009552,
+        //center: [-105.60, 40.25],
+        //zoom: 9,
+        constraints: {
+            snapToZoom: false,
+            minZoom: 9,
+        },        
+        container: "viewDiv",
+        extent: {
+            xmax: -11601662,
+            xmin: -11898553,
+            ymax: 5017624,
+            ymin: 4803601,
             spatialReference: {
                 wkid: 102100
             }
-        }*/
+        }
     });
 
     //Remove default zoom buttons from upper left of map
@@ -397,6 +402,10 @@ require([
     view.on("pointer-move", showLatLon);
 
     function showLatLon(evt) {
-        document.getElementById("mouseLoc").innerText = (evt.mouseX) + " | " + (evt.mouseY);
+
+        var pt = view.toMap(evt);
+        var ddpt = webMercatorUtils.webMercatorToGeographic(pt);
+        
+        document.getElementById("mouseLoc").innerText = (ddpt.y).toFixed(5) + " | " + (ddpt.x).toFixed(5);        
     }
 });
