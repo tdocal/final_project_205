@@ -46,3 +46,7 @@ html, body, #viewDiv {
     background-color: #ffffff;
     color: #711100;
 }
+.esri-widget-button:hover {
+    background-color: #ffffff;
+    color: #711100;
+}

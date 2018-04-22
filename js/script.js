@@ -27,11 +27,9 @@ require([
 
     view = new MapView({
         map: map,
-        //center: [-105.60, 40.25],
-        //zoom: 9,
         constraints: {
             snapToZoom: false,
-            minZoom: 9,
+            minZoom: 8,
         },        
         container: "viewDiv",
         extent: {
@@ -161,6 +159,7 @@ require([
         }]
     };
 
+    //Create border style for each park boundary
     var rmnpBorder = {
         type: "simple-fill",
         color: [77, 175, 74, 0],
@@ -209,6 +208,8 @@ require([
         }
     };*/
 
+    //Render borders based on DISTRICTNAME using border style
+    //This is also where info for legend is taken
     var borderRenderer = {
         type: "unique-value",
         //defaultSymbol: defaultBorder,
@@ -229,6 +230,7 @@ require([
         }]
     };
 
+    //RMNP needs a different renderer since the polygon is taken from a different location than the ranger districts
     var rmnpRenderer = {
         type: "simple",
         field: "NAME",
