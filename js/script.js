@@ -1,4 +1,3 @@
-var view;
 require([
     "esri/Map",
     "esri/views/MapView",
@@ -25,12 +24,12 @@ require([
         basemap: "topo"
     });
 
-    view = new MapView({
+    var view = new MapView({
         map: map,
         constraints: {
             snapToZoom: false,
-            minZoom: 8,
-        },        
+            minZoom: 8
+        },
         container: "viewDiv",
         extent: {
             xmax: -11601662,
@@ -219,11 +218,11 @@ require([
             value: "Boulder Ranger District",
             symbol: bouldBorder
         }, {
+            value: "Sulphur Ranger District",
+            symbol: sulphBorder            
+        }, {
             value: "Canyon Lakes Ranger District",
             symbol: canBorder
-        }, {
-            value: "Sulphur Ranger District",
-            symbol: sulphBorder
         }, {
             value: "Rocky Mountain National Park",
             symbol: rmnpBorder
@@ -242,7 +241,7 @@ require([
         url: "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_RangerDistricts_01/MapServer/1",
         //outFields: ["DISTRICTNAME"],
         definitionExpression: "DISTRICTNAME = 'Sulphur Ranger District'",
-        //definitionExpression: "DISTRICTNAME = 'Sulphur Ranger District' || DISTRICTNAME = 'Canyon Lakes Ranger District' || DISTRICTNAME = 'Boulder Ranger District'",
+        //definitionExpression: ("DISTRICTNAME = 'Sulphur Ranger District' || DISTRICTNAME = 'Canyon Lakes Ranger District' || DISTRICTNAME = 'Boulder Ranger District'"),
         renderer: borderRenderer
     });
     map.add(sulphurLayer);
@@ -368,12 +367,12 @@ require([
             x += (targetX - x) * 0.1;
             y += (targetY - y) * 0.1;
 
-            /*if (Math.abs(targetX - x) < 1 && Math.abs(targetY - y) < 1) {
-            x = targetX;
-            y = targetY;
-          } else {
-            requestAnimationFrame(move);
-          }*/
+            if (Math.abs(targetX - x) < 1 && Math.abs(targetY - y) < 1) {
+                x = targetX;
+                y = targetY;
+            } else {
+                requestAnimationFrame(move);
+            }
 
             style.transform = "translate3d(" + Math.round(x) + "px," + Math.round(y) + "px, 0)";
         }
@@ -408,6 +407,6 @@ require([
         var pt = view.toMap(evt);
         var ddpt = webMercatorUtils.webMercatorToGeographic(pt);
         
-        document.getElementById("mouseLoc").innerText = (ddpt.y).toFixed(5) + " | " + (ddpt.x).toFixed(5);        
+        document.getElementById("mouseLoc").innerText = (ddpt.y).toFixed(5) + " | " + (ddpt.x).toFixed(5);
     }
 });
