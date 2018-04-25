@@ -28,7 +28,8 @@ require([
         map: map,
         constraints: {
             snapToZoom: false,
-            minZoom: 8
+            minZoom: 8,
+            maxZoom: 17
         },
         container: "viewDiv",
         extent: {
@@ -233,13 +234,13 @@ require([
     var rmnpRenderer = {
         type: "simple",
         field: "NAME",
-        symbol: rmnpBorder
+        value: "Rocky Mountain National Park",
+        symbol: rmnpBorder        
     };
 
     //Create the layer showing the park boundaries, if the boundaries change a new service url may be needed to display the correct borders            
     var sulphurLayer = new FeatureLayer({
         url: "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_RangerDistricts_01/MapServer/1",
-        //outFields: ["DISTRICTNAME"],
         definitionExpression: "DISTRICTNAME = 'Sulphur Ranger District'",
         //definitionExpression: ("DISTRICTNAME = 'Sulphur Ranger District' || DISTRICTNAME = 'Canyon Lakes Ranger District' || DISTRICTNAME = 'Boulder Ranger District'"),
         renderer: borderRenderer
@@ -248,7 +249,6 @@ require([
 
     var canyonLayer = new FeatureLayer({
         url: "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_RangerDistricts_01/MapServer/1",
-        legendEnabled: true,
         definitionExpression: "DISTRICTNAME = 'Canyon Lakes Ranger District'",
         renderer: borderRenderer
     });
@@ -256,7 +256,6 @@ require([
 
     var boulderLayer = new FeatureLayer({
         url: "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_RangerDistricts_01/MapServer/1",
-        legendEnabled: true,
         definitionExpression: "DISTRICTNAME = 'Boulder Ranger District'",
         renderer: borderRenderer
     });
@@ -264,7 +263,7 @@ require([
 
     var rmnpLayer = new FeatureLayer({
         url: "https://services.nationalmap.gov/arcgis/rest/services/govunits/MapServer/23",
-        legendEnabled: true,
+        //legendEnabled: true,
         definitionExpression: "NAME = 'Rocky Mountain National Park'",
         renderer: rmnpRenderer
     });
@@ -301,7 +300,6 @@ require([
     var legend = new Legend({
         view: view,
         layerInfos: [{
-            //layer: rmnpLayer,
             layer: sulphurLayer,
             title: "District Boundaries"
         }]
@@ -323,11 +321,6 @@ require([
                 .then(function (hit) {
                     promise = null;
 
-                    if (highlight) {
-                        highlight.remove();
-                        highlight = null;
-                    }
-
                     var results = hit.results.filter(function (result) {
                             return result.graphic.layer === trailPoints;
                         });
@@ -335,7 +328,6 @@ require([
                         var graphic = results[0].graphic;
                         var screenPoint = hit.screenPoint;
 
-                        highlight = layerview.highlight(graphic);
                         tooltip.show(screenPoint, graphic.getAttribute("NAME"));
                     } else {
                         tooltip.hide();
@@ -344,6 +336,7 @@ require([
         });
     }
 
+    //Move tooltip along with the mouse cursor
     function createTooltip() {
         var tooltip = document.createElement("div");
         var style = tooltip.style;
