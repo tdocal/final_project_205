@@ -123,7 +123,7 @@ require([
 
     var rmnpSym = {
         type: "picture-marker",
-        url: "https://static.arcgis.com/images/Symbols/Basic/BlueStickpin.png",
+        url: "https://static.arcgis.com/images/Symbols/Basic/GreenStickpin.png",
         width: "30px",
         height: "30px",
         angle: 30
@@ -241,26 +241,11 @@ require([
     //Create the layer showing the park boundaries, if the boundaries change a new service url may be needed to display the correct borders            
     var sulphurLayer = new FeatureLayer({
         url: "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_RangerDistricts_01/MapServer/1",
-        //outFields:["DISTRICTNAME"],
-        //definitionExpression: "DISTRICTNAME = 'Sulphur Ranger District'",
         definitionExpression: ("DISTRICTNAME = 'Sulphur Ranger District' OR DISTRICTNAME = 'Canyon Lakes Ranger District' OR DISTRICTNAME = 'Boulder Ranger District'"),
         renderer: borderRenderer
     });
     map.add(sulphurLayer);
 
-    /*var canyonLayer = new FeatureLayer({
-        url: "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_RangerDistricts_01/MapServer/1",
-        definitionExpression: "DISTRICTNAME = 'Canyon Lakes Ranger District'",
-        renderer: borderRenderer
-    });
-    map.add(canyonLayer);
-
-    var boulderLayer = new FeatureLayer({
-        url: "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_RangerDistricts_01/MapServer/1",
-        definitionExpression: "DISTRICTNAME = 'Boulder Ranger District'",
-        renderer: borderRenderer
-    });
-    map.add(boulderLayer);*/
 
     var rmnpLayer = new FeatureLayer({
         url: "https://services.nationalmap.gov/arcgis/rest/services/govunits/MapServer/23",
