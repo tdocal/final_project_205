@@ -92,7 +92,7 @@ require([
     //Create symbols that are rendered based on PARK_NAME field from the database
     var bouldSym = {
         type: "picture-marker",
-        url: "http://static.arcgis.com/images/Symbols/Basic/RedStickpin.png",
+        url: "https://static.arcgis.com/images/Symbols/Basic/RedStickpin.png",
         width: "30px",
         height: "30px",
         angle: 30
@@ -100,7 +100,7 @@ require([
 
     var sulphSym = {
         type: "picture-marker",
-        url: "http://static.arcgis.com/images/Symbols/Basic/OrangeStickpin.png",
+        url: "https://static.arcgis.com/images/Symbols/Basic/OrangeStickpin.png",
         width: "30px",
         height: "30px",
         angle: 30
@@ -108,7 +108,7 @@ require([
 
     var canSym = {
         type: "picture-marker",
-        url: "http://static.arcgis.com/images/Symbols/Basic/YellowStickpin.png",
+        url: "https://static.arcgis.com/images/Symbols/Basic/YellowStickpin.png",
         width: "30px",
         height: "30px",
         angle: 30
@@ -116,14 +116,14 @@ require([
 
     var rmnpTrailsSym = {
         type: "picture-marker",
-        url: "http://static.arcgis.com/images/Symbols/Basic/PurpleStickpin.png",
+        url: "https://static.arcgis.com/images/Symbols/Basic/PurpleStickpin.png",
         width: "30px",
         height: "30px"
     };
 
     var rmnpSym = {
         type: "picture-marker",
-        url: "http://static.arcgis.com/images/Symbols/Basic/BlueStickpin.png",
+        url: "https://static.arcgis.com/images/Symbols/Basic/BlueStickpin.png",
         width: "30px",
         height: "30px",
         angle: 30
@@ -131,7 +131,7 @@ require([
 
     var defaultSym = {
         type: "picture-marker",
-        url: "http://static.arcgis.com/images/Symbols/Basic/BlackStickpin.png",
+        url: "https://static.arcgis.com/images/Symbols/Basic/BlackStickpin.png",
         width: "30px",
         height: "30px",
         angle: 30
@@ -235,19 +235,20 @@ require([
         type: "simple",
         field: "NAME",
         value: "Rocky Mountain National Park",
-        symbol: rmnpBorder        
+        symbol: rmnpBorder
     };
 
     //Create the layer showing the park boundaries, if the boundaries change a new service url may be needed to display the correct borders            
     var sulphurLayer = new FeatureLayer({
         url: "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_RangerDistricts_01/MapServer/1",
-        definitionExpression: "DISTRICTNAME = 'Sulphur Ranger District'",
-        //definitionExpression: ("DISTRICTNAME = 'Sulphur Ranger District' || DISTRICTNAME = 'Canyon Lakes Ranger District' || DISTRICTNAME = 'Boulder Ranger District'"),
+        //outFields:["DISTRICTNAME"],
+        //definitionExpression: "DISTRICTNAME = 'Sulphur Ranger District'",
+        definitionExpression: ("DISTRICTNAME = 'Sulphur Ranger District' OR DISTRICTNAME = 'Canyon Lakes Ranger District' OR DISTRICTNAME = 'Boulder Ranger District'"),
         renderer: borderRenderer
     });
     map.add(sulphurLayer);
 
-    var canyonLayer = new FeatureLayer({
+    /*var canyonLayer = new FeatureLayer({
         url: "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_RangerDistricts_01/MapServer/1",
         definitionExpression: "DISTRICTNAME = 'Canyon Lakes Ranger District'",
         renderer: borderRenderer
@@ -259,11 +260,10 @@ require([
         definitionExpression: "DISTRICTNAME = 'Boulder Ranger District'",
         renderer: borderRenderer
     });
-    map.add(boulderLayer);
+    map.add(boulderLayer);*/
 
     var rmnpLayer = new FeatureLayer({
         url: "https://services.nationalmap.gov/arcgis/rest/services/govunits/MapServer/23",
-        //legendEnabled: true,
         definitionExpression: "NAME = 'Rocky Mountain National Park'",
         renderer: rmnpRenderer
     });
