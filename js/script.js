@@ -114,13 +114,6 @@ require([
         angle: 30
     };
 
-    var rmnpTrailsSym = {
-        type: "picture-marker",
-        url: "https://static.arcgis.com/images/Symbols/Basic/PurpleStickpin.png",
-        width: "30px",
-        height: "30px"
-    };
-
     var rmnpSym = {
         type: "picture-marker",
         url: "https://static.arcgis.com/images/Symbols/Basic/GreenStickpin.png",
@@ -150,9 +143,6 @@ require([
         }, {
             value: "Canyon Lakes Ranger District",
             symbol: canSym
-        }, {
-            value: "Rocky Mountain National Park Trails",
-            symbol: rmnpTrailsSym
         }, {
             value: "Rocky Mountain National Park",
             symbol: rmnpSym
