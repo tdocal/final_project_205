@@ -238,8 +238,9 @@ require([
 
 
     var rmnpLayer = new FeatureLayer({
-        url: "https://services.nationalmap.gov/arcgis/rest/services/govunits/MapServer/23",
-        definitionExpression: "NAME = 'Rocky Mountain National Park'",
+        //url: "https://services.nationalmap.gov/arcgis/rest/services/govunits/MapServer/23",
+        url: "https://mapservices.nps.gov/arcgis/rest/services/LandResourcesDivisionTractAndBoundaryService/MapServer/2",
+        definitionExpression: "PARKNAME = 'Rocky Mountain'",
         renderer: rmnpRenderer
     });
     map.add(rmnpLayer);
